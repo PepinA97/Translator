@@ -7,3 +7,4 @@ bin/
 Properties/
 *.csproj
 *.user
+SubscriptionKey.cs
