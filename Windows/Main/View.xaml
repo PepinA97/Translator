@@ -1,0 +1,57 @@
+﻿<Window x:Class="TranslatorWPF.Windows.Main.View"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Translator" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <DataTemplate x:Key="LanguageEntry">
+            <StackPanel Orientation="Horizontal">
+                <Image></Image>
+                <TextBlock Text="{Binding Path=Name}"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel>
+            <TextBlock Text="FROM"></TextBlock>
+            <ListBox ItemsSource="{Binding Path=Languages}" SelectedItem="{Binding Path=SelectedFromLanguage}" ItemTemplate="{StaticResource LanguageEntry}" IsEnabled="{Binding Path=IsNotTranslating}"></ListBox>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <TextBlock Text="TARGET"></TextBlock>
+            <ListBox ItemsSource="{Binding Path=Languages}" SelectedItem="{Binding Path=SelectedToLanguage}" ItemTemplate="{StaticResource LanguageEntry}" IsEnabled="{Binding Path=IsNotTranslating}"></ListBox>
+        </StackPanel>
+        
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="{Binding Path=Logs}" Background="#FFE2E2E2" TextWrapping="Wrap"></TextBlock>
+            
+            <StackPanel Grid.Row="1"  Orientation="Horizontal">
+                <Button Command="{Binding Path=StartTranslating}">
+                    <Image Source="/Windows/Main/Run_16x.png"></Image>
+                </Button>
+                <Button Command="{Binding Path=StopTranslating}">
+                    <Image Source="/Windows/Main/Stop_16x.png"></Image>
+                </Button>
+                <Button Command="{Binding Path=SaveLogs}">
+                    <Image Source="/Windows/Main/Save_16x.png"></Image>
+                </Button>
+                <Button Command="{Binding Path=SelectDevices}">
+                    <Image Source="/Windows/Main/Audio_16x.png"></Image>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
